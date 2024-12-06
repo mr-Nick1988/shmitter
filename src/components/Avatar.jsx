@@ -1,28 +1,47 @@
-import {useContext} from "react";
-import {TwitterContext} from "../utils/context.js";
 import {useDispatch, useSelector} from "react-redux";
-import {changeAvatar} from "../actions/userAction.js";
+import { changeAvatar, changeName } from '../actions/userAction.js';
 
-const Avatar = ({size}) => {
-    const {user, changeName} = useContext(TwitterContext);
-    const {avatar} = useSelector(state => state.user);
+const Avatar = ({ size }) => {
+    const { avatar, name } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
+    const handleAvatarChange = () => {
+        const url = prompt('Enter new avatar url');
+        dispatch(changeAvatar(url));
+    };
+
+    const handleNameChange = (e) => {
+        e.preventDefault();
+        const name = prompt('Enter new name');
+        if (name) {
+            dispatch(changeName(name));
+        }
+    };
+
     return (
-        <img
-            onClick={() => {
-                const url = prompt('Enter new avatar url');
-                dispatch(changeAvatar(url));
-            }}
-            onContextMenu={e => {
-                e.preventDefault();
-                const name = prompt('Enter new name');
-                changeName(name);
-            }}
-            className={`user-avatar ${size ?? ''}`}
-            src={avatar} alt={user.name}
-        />
+        <div>
+            <img
+                className={`user-avatar ${size ?? ''}`}
+                src={avatar}
+                alt={name}
+                onClick={handleAvatarChange}
+                onContextMenu={handleNameChange}
+            />
+            <span>{name}</span>
+        </div>
     );
 };
 
 export default Avatar;
+
+
+
+
+
+
+
+
+
+
+
+
