@@ -1,17 +1,11 @@
 import Avatar from "./Avatar.jsx";
 
-
-
-const Navigation = ({ user, onAvatarChange }) => {
+const Navigation = () => {
     return (
         <div className={'nav'}>
-            <Avatar user={user} size={'small'} onAvatarChange={onAvatarChange} />
+            <Avatar size={'small'}/>
         </div>
     );
 };
 
 export default Navigation;
-
-
-
-

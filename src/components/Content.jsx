@@ -1,9 +1,7 @@
-
-
 const Content = () => {
     return (
         <div className={'content'}>
-            Main Content
+            Main content here
         </div>
     );
 };
